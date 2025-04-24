@@ -1,44 +1,33 @@
 <?php
 session_start();
-require_once("../../config/config.php");
+require_once("../models/User.php");
 
 
-// testing commit
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    $action = $_GET['action'];
     $json = file_get_contents('php://input');
     $data = json_decode($json, true);
-    switch ($data['fType']) {
+    switch ($action) {
         case 'login':
             $email = $data['email'] ?? '';
             $pass = $data['password'] ?? '';
-            $qry = $pdo->prepare('SELECT * FROM users WHERE email = ?');
-            $qry->execute(params: [$email]);
-            $admin = $qry->fetch();
-            if ($admin && hash('sha256', $pass) == $admin['password']) {
-                $_SESSION['admin_logged_in'] = true;
-                $_SESSION['email'] = $email;
-                echo json_encode([
-                    'success' => true,
-                    'redirect' => '../../public/dashboard.php'
-                ]);
-            } else {
-                echo json_encode([
-                    'success' => false,
-                    'error' => "Invalid Creds"
-                ]);
-            }
+            $res = User::loginUser($email, $pass);
+            echo json_encode($res);
             break;
-        case 'signup':
+        case 'sign_up':
             $email = $data['email'] ?? '';
             $username = $data['username'] ?? '';
             $pass = $data['password'] ?? '';
-            $qry = $pdo->prepare("INSERT INTO users (username,email,password) VALUES (?,?,?)");
-            $qry->execute([$username, $email, hash('sha256', $pass)]);
-            error_log("User signup" . $qry);
-            $_SESSION['logged_in'] = true;
-            $_SESSION['email'] = $email;
+            $res = User::signupUser($username, $email, $pass);
+            error_log($res['success']);
+            echo json_encode($res);
+            break;
+        default:
             echo json_encode([
-                'success' => true,
+                'success' => false,
+                'error' => "No action provided"
             ]);
+            break;
+
     }
 }

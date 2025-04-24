@@ -35,15 +35,14 @@ document.addEventListener("DOMContentLoaded", function () {
     form.addEventListener("submit", (e) => {
         e.preventDefault()
         let data = {
-            fType: type,
             email: email.value.trim(),
             password: pass.value
         }
         if (type == 'signup') {
             data.username = username.value.trim();
         }
-        console.log(data)
-        fetch("../../app/controllers/authController.php", {
+        let action = type == 'signup' ? "sign_up" : "login"
+        fetch(`../../app/controllers/authController.php/?action=${action}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -63,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         title.innerHTML = type == 'signup' ? "Sign Up" : "Login";
                         changeType.innerHTML = type == 'signup' ? "Login" : "Signup";
                         email.value = ''
-                        pass.valie = ''
+                        pass.value = ''
                         toggleUsernameField()
                     }
                     if (data.redirect != undefined) {
@@ -74,6 +73,5 @@ document.addEventListener("DOMContentLoaded", function () {
                     console.log(data.error);
                 }
             })
-            .catch((err) => console.log(err))
     })
 })
