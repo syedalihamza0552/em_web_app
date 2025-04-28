@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let usernameL = document.getElementById('username-l');
     const pass = document.getElementById('password');
     const sBtn = document.getElementById('s-btn');
-    const changeType = document.getElementById('change-type');
+    // const changeType = document.getElementById('change-type');
     const title = document.getElementById('title')
     sBtn.innerHTML = type;
 
