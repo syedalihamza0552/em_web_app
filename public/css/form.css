@@ -1,0 +1,55 @@
+/* Form styles for Add/Edit Event */
+#frm {
+    max-width: 700px; /* Maximum width for larger screens */
+    width: 90%; /* Flexible width for smaller screens */
+    margin: 0 auto; /* Center horizontally */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem; /* Reduced padding for consistency */
+    background-color: #fff; /* White background for contrast */
+    border-radius: 0.5rem; /* Rounded corners */
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075); /* Subtle shadow */
+}
+
+/* Ensure form elements take full width */
+#frm .form-control,
+#frm .form-select,
+#frm .btn {
+    width: 100%;
+}
+
+/* Spacing between form elements */
+#frm .mb-3 {
+    width: 100%; /* Ensure form groups take full width */
+}
+
+/* Center the submit button */
+#frm .btn {
+    align-self: center;
+    padding: 0.5rem 2rem; /* Consistent padding */
+}
+
+/* Responsive adjustments for mobile */
+@media (max-width: 767.98px) {
+    #frm {
+        width: 100%; /* Full width on mobile */
+        padding: 1rem; /* Reduced padding for smaller screens */
+    }
+
+    #frm .form-control,
+    #frm .form-select {
+        font-size: 1rem; /* Ensure readable input sizes */
+    }
+
+    #frm .btn {
+        padding: 0.5rem 1.5rem; /* Slightly smaller button padding */
+    }
+}
+
+/* Error alert styling */
+#frm .alert {
+    width: 100%; /* Full width for alerts */
+    margin-top: 1rem;
+}
