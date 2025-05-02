@@ -50,12 +50,6 @@ class User
             $_SESSION['logged_in'] = true;
             $_SESSION['email'] = $email;
             $_SESSION['username'] = $res['username'];
-            error_log($res['isAdmin']);
-            if ($res['isAdmin']) {
-                $_SESSION['isAdmin'] = true;
-            } else {
-                $_SESSION['isAdmin'] = false;
-            }
             return [
                 'success' => true,
                 'redirect' => '../views/home.php'
