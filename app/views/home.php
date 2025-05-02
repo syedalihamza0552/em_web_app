@@ -4,7 +4,6 @@ require_once('../models/Event.php');
 require_once('../models/Category.php');
 $category = Category::fetchAllCategories();
 $categorys = $category['categories'];
-print_r($categorys);
 $events = Event::fetchAllEvents();
 $events = $events['events'];
 ?>
